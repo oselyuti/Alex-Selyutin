@@ -1,0 +1,13 @@
+#ifndef __SORT_1_H__#define __SORT_1_H__#include <vector>template <typename T>void selection_sort(std::vector<T> &A) {  int i, j, k, N=A.size();  for (i=0; i<N-1; i++) {    k = i;    for (j=i+1; j<N; j++) {      if (A[j] < A[k])        k = j;    }    swap(A[i], A[k]);  }}template <typename T>void bubble_sort(std::vector<T> &A) {  int i, j, N=A.size();  for (i=N-1; 0<i; i--) {    for (j=0; j<i; j++) {      if (A[j+1] < A[j])        swap(A[j], A[j+1]);    }  }}template <typename T>void insertion_sort(std::vector<T> &A) {  int i, j, N=A.size();  for (i=1; i<N; i++) {    T tmp = A[i];    for (j=i; 0<j && tmp<A[j-1]; j--)      A[j] = A[j-1];    A[j] = tmp;  }}#endif# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
+workflows:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
+    jobs:
+      - welcome/run
